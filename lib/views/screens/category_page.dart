@@ -1,19 +1,29 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:news_app_/services/sports_api.dart';
+import 'package:news_app_/services/category_api.dart';
 import '../../models/news_model.dart';
 import '../../theme/colors.dart';
 import '../widgets/news_list.dart';
 
-class SportsPage extends StatefulWidget {
-  const SportsPage({Key? key}) : super(key: key);
+class CategoryPage extends StatefulWidget {
+  final String categoryQuery;
+  const CategoryPage({
+    Key? key,
+    required this.categoryQuery,
+  }) : super(key: key);
 
   @override
-  State<SportsPage> createState() => _SportsPageState();
+  State<CategoryPage> createState() => _BusinessPageState();
 }
 
-class _SportsPageState extends State<SportsPage> {
+class _BusinessPageState extends State<CategoryPage> {
+  TextEditingController categoryController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    categoryController.text = widget.categoryQuery;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +34,9 @@ class _SportsPageState extends State<SportsPage> {
         title: Container(
           color: primary,
           padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
-          child: Text("Sports",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.white),)),
+          child: Text(
+            categoryController.text,
+            style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18,color: Colors.white),)),
         leading: IconButton(onPressed: (){
           Navigator.of(context).pop();
         }, 
@@ -36,14 +48,13 @@ class _SportsPageState extends State<SportsPage> {
           children: [
             Expanded(
               child: FutureBuilder<List<Article>>(
-                future: SportsApiService().fetchSportsNews(),
+                future: CategoryApiService().fetchCategoryNews(categoryController.text),
                 builder: (context, snapshot){
                   if(!snapshot.hasData){
                     return Center(child: CircularProgressIndicator(color: blue,),);
                   } else {
                     List<Article> newsArticle = snapshot.data!;
                     return ListView.builder(
-                      physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.vertical,
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index){

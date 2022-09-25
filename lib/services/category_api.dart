@@ -3,15 +3,16 @@
 import 'package:dio/dio.dart';
 import '../models/news_model.dart';
 
-class HeadlineApiServices {
+class CategoryApiService {
   static String _apiKey ='033a693c19e440ad8d1bc53afc769d35';
-  String _url = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=$_apiKey';
 
   final _dio = Dio();
 
-  Future <List<Article>>fetchHeadlineNews() async {
+  Future <List<Article>>fetchCategoryNews(String query) async {
     try{
-      Response response = await _dio.get(_url);
+      Response response = await _dio.get(
+        'https://newsapi.org/v2/top-headlines?country=us&category=$query&apiKey=$_apiKey',
+      );
       NewsResponse newsResponse = NewsResponse.fromJson(response.data);
       return newsResponse.articles;
     } on DioError catch (e){

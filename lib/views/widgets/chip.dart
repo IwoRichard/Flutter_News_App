@@ -1,13 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:news_app_/views/screens/business_page.dart';
+import 'package:news_app_/views/screens/category_page.dart';
 import '../../theme/colors.dart';
-import '../screens/entertainment_page.dart';
-import '../screens/health_page.dart';
-import '../screens/science_page.dart';
-import '../screens/sports_page.dart';
-import '../screens/technology_page.dart';
 
 class NewsChip extends StatefulWidget {
   const NewsChip({Key? key}) : super(key: key);
@@ -28,7 +23,7 @@ class _NewsChipState extends State<NewsChip> {
           onTap: (){
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => BusinessPage()
+                builder: (context) => CategoryPage(categoryQuery: 'Business')
                 )
             );
           },
@@ -42,7 +37,7 @@ class _NewsChipState extends State<NewsChip> {
           onTap: (){
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => EntertainmentPage()
+                builder: (context) => CategoryPage(categoryQuery: 'Entertainment')
                 )
             );
           },
@@ -56,7 +51,7 @@ class _NewsChipState extends State<NewsChip> {
           onTap: (){
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => HealthPage()
+                builder: (context) => CategoryPage(categoryQuery: 'Health')
                 )
             );
           },
@@ -70,7 +65,7 @@ class _NewsChipState extends State<NewsChip> {
           onTap: (){
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => SciencePage()
+                builder: (context) => CategoryPage(categoryQuery: 'Science')
                 )
             );
           },
@@ -84,7 +79,7 @@ class _NewsChipState extends State<NewsChip> {
           onTap: (){
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => SportsPage()
+                builder: (context) => CategoryPage(categoryQuery: 'Sports')
                 )
             );
           },
@@ -98,7 +93,7 @@ class _NewsChipState extends State<NewsChip> {
           onTap: (){
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => TechnologyPage()
+                builder: (context) => CategoryPage(categoryQuery: 'Technology')
                 )
             );
           },
